@@ -44,8 +44,9 @@ def load_data(file_bytes_or_path):
     # Build language pair
     if src_col and tgt_col:
         df["Language Pair"] = df[src_col].fillna("").astype(str).str.strip() + " \u2192 " + df[tgt_col].fillna("").astype(str).str.strip()
-        df["Language Pair"] = df["Language Pair"].str.replace(r"^\s*\u2192\s*$", "", regex=True)
-    else:
+# Remove the 'r' prefix so Python processes the Unicode escape
+df["Language Pair"] = df["Language Pair"].str.replace("^\s*\u...", ...)    
+else:
         df["Language Pair"] = np.nan
 
     # Build unified Subject Area column (union across levels, explode to 1 per row)
