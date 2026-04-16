@@ -65,6 +65,7 @@ def load_data(file_bytes_or_path):
     emp_name_col = next((c for c in df.columns if "employee name" in str(c).lower()), None)
     emp_code_col = next((c for c in df.columns if "employee code" in str(c).lower()), None)
     fl_code_col  = next((c for c in df.columns if "fl code" in str(c).lower()), None)
+    email_col = next((c for c in df.columns if "email" in str(c).lower()), None)
 
     return df, {
         "src_col": src_col,
@@ -78,6 +79,7 @@ def load_data(file_bytes_or_path):
         "emp_code_col": emp_code_col,
         "fl_code_col": fl_code_col,
         "subj_cols": subj_cols,
+        "email_col": email_col,
     }
 
 def kpi_card(label, value, help_text=None):
@@ -162,6 +164,7 @@ col1, col2, col3, col4 = st.columns(4)
 emp_name_col = meta["emp_name_col"]
 emp_code_col = meta["emp_code_col"]
 fl_code_col = meta["fl_code_col"]
+email_col = meta.get("email_col")
 
 def unique_fl_count(df_):
     keys = []
@@ -239,7 +242,7 @@ st.divider()
 st.markdown("### Matching FLs — Details")
 
 display_cols = []
-for c in [fl_code_col, emp_code_col, emp_name_col, src_col, tgt_col, "Language Pair", step_col, currency_col, flat_rate_col, range1_col, range2_col]:
+for c in [fl_code_col, emp_code_col, emp_name_col, email_col, src_col, tgt_col, "Language Pair", step_col, currency_col, flat_rate_col, range1_col, range2_col]:
     if c and c in flt.columns and c not in display_cols:
         display_cols.append(c)
 
