@@ -1,4 +1,3 @@
-
 import io
 import os
 import pandas as pd
@@ -46,7 +45,7 @@ def load_data(file_bytes_or_path):
         df["Language Pair"] = df[src_col].fillna("").astype(str).str.strip() + " \u2192 " + df[tgt_col].fillna("").astype(str).str.strip()
 # Remove the 'r' prefix so Python processes the Unicode escape
 df["Language Pair"] = df["Language Pair"].str.replace("^\s*\u...", ...)    
-else:
+    else:
         df["Language Pair"] = np.nan
 
     # Build unified Subject Area column (union across levels, explode to 1 per row)
